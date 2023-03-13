@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/kia sportage.css">
+</head>
+<body>
+    
+    <div class="carousel-container">
+        <div class="carousel-slide">
+          <img src="img/kia sportage lateral frente.jpeg" alt="Imagem 1">
+          <img src="img/kia sportage lateral.jpeg" alt="Imagem 2">
+          <img src="img/kia sportage lateral traseira.jpeg" alt="Imagem 3">
+          <img src="img/kia sportage traseira.jpeg" alt="Imagem 4">
+          <img src="img/kia sportage interna.jpeg" alt="Imagem 5">
+        </div>
+      </div>
+      
+      <button class="carousel-prev">Anterior</button>
+      <button class="carousel-next">Próximo</button>
+
+    <script>
+        const carouselSlide = document.querySelector(".carousel-slide");
+        const carouselImages = document.querySelectorAll(".carousel-slide img");
+      
+        // Botões de navegação
+        const prevBtn = document.querySelector(".carousel-prev");
+        const nextBtn = document.querySelector(".carousel-next");
+      
+        // Contador do slide
+        let counter = 1;
+        const size = carouselImages[0].clientWidth;
+      
+        carouselSlide.style.transform = `translateX(${-size * counter}px)`;
+      
+        // Botão próximo
+        nextBtn.addEventListener("click", () => {
+          if (counter >= carouselImages.length - 1) return;
+          carouselSlide.style.transition = "transform 0.4s ease-in-out";
+          counter++;
+          carouselSlide.style.transform = `translateX(${-size * counter}px)`;
+        });
+      
+        // Botão anterior
+        prevBtn.addEventListener("click", () => {
+          if (counter <= 0) return;
+          carouselSlide.style.transition = "transform 0.4s ease-in-out";
+          counter--;
+          carouselSlide.style.transform = `translateX(${-size * counter}px)`;
+        });
+      
+        // Resetar slide
+        carouselSlide.addEventListener("transitionend", () => {
+          if (carouselImages[counter].id === "lastClone") {
+            carouselSlide.style.transition = "none";
+            counter = carouselImages.length - 2;
+            carouselSlide.style.transform = `translateX(${-size * counter}px)`;
+          }
+          if (carouselImages[counter].id === "firstClone") {
+            carouselSlide.style.transition = "none";
+            counter = carouselImages.length - counter;
+            carouselSlide.style.transform = `translateX(${-size * counter}px)`;
+          }
+        });
+    </script>
+
+</body>
+</html>
